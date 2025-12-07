@@ -127,8 +127,80 @@ def update_stok():
 
     else:
         print(f"[!] Barang '{nama}' tidak ditemukan dalam inventory\n")
+        
 ## cari barang ##
+def cari_barang():
+    if not inventory:
+        print("[!] Inventory masih kosong\n")
+        return
+    
+    nama = input("Masukkan nama barang yang dicari : ").strip().capitalize()
+    
+    if nama in inventory:
+        stok, satuan = inventory[nama]
+        print(f"- {nama} = {stok} {satuan}\n")
 
+    else:
+        print(f"[!] Barang '{nama}' tidak ditemukan dalam inventory\n")
+        
 ## hapus barang ##
+def hapus_barang():
+    if not inventory:
+        print("[!] Inventory masih kosong\n")
+        return
+    
+    nama = input("Masukkan nama barang yang akan dihapus : ").strip().capitalize()
+    
+    if nama in inventory:
+        del inventory[nama]
+        simpan_ke_file()
+        print(f"Barang '{nama}' berhasil dihapus dari inventory\n")
+        return
+    else:
+        print(f"[!] Barang '{nama}' tidak ditemukan dalam inventory\n")
+        return
 
 ## tampilan menu ##
+def menu():
+    while True:
+        print("======== Inventory Management ========")
+        print("""1. Buat Inventory Baru
+2. Ambil Inventory Dari File (txt)
+3. tambah barang
+4. Tampilkan Inventory saat ini
+5. Update Stok Barang
+6. Cari Barang
+7. Hapus Barang
+8. Keluar
+
+note:
+untuk ambil inventory dari file gunakan format :
+Nama Barang, Stok, Satuan.
+ex: pensil,20,pack.""")
+        print("======================================\n")
+
+        
+        pilih = input("pilih menu : ").strip()
+        
+        if pilih == "1":
+            buat_inventory_baru()
+        elif pilih == "2" :
+            isi_inventory_file()
+        elif pilih == "3":
+            tambah_barang()
+        elif pilih == "4":
+            tampilkan_inventory()
+        elif pilih =="5" :
+            update_stok()
+        elif pilih == "6":
+            cari_barang()
+        elif pilih == "7":
+            hapus_barang()
+        elif pilih == "8":
+            print("[-] keluar dari program\n")
+            break
+        else:
+            print("[!] Tidak ada input / pilihan diluar nurul, LIHAT MENU YG TERSEDIA!!!!\n")
+
+if __name__ == "__main__":
+    menu()
