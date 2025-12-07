@@ -54,7 +54,34 @@ def buat_inventory_baru():
     print(f"Data berhasil disimpan di {nama_file}.txt")
 
 ## menambah inventory dari file ##
+def isi_inventory_file():
+    global isi_file
+    inventory.clear()
 
+    nama_file = input("Masukkan nama file (tanpa .txt) : ").strip()
+
+    try:
+        with open(f"{nama_file}.txt", "r") as file:
+            for baris in file:
+
+                nama, stok, satuan = baris.strip().split(",")
+                
+                if nama in inventory:
+                    print(f"\n[!] Barang '{nama}' sudah ada dalam inventory barang yang lama akan diabaikan\n")
+                    continue
+                inventory[nama] = (int(stok), satuan)
+
+            if not inventory:
+                print(f"\n[!] File '{nama_file}.txt' kosong (gunakan opsi tambah barang)\n")
+                return
+            
+            else:
+                isi_file = nama_file
+                print(f"\n[+] Inventory berhasil ditambahkan dari file '{nama_file}.txt'\n")
+                return 
+                except FileNotFoundError:
+        print(f"\n[!] File '{nama_file}.txt' tidak ditemukan\n")
+        return
 ## menampilkan inventory ##
 
 ## sinpan inventory ke file ##
