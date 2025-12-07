@@ -53,7 +53,7 @@ def buat_inventory_baru():
     isi_file = nama_file
     print(f"Data berhasil disimpan di {nama_file}.txt")
 
-## menambah inventory dari file ##
+## menambah inventory dari file ##    
 def isi_inventory_file():
     global isi_file
     inventory.clear()
@@ -79,10 +79,12 @@ def isi_inventory_file():
                 isi_file = nama_file
                 print(f"\n[+] Inventory berhasil ditambahkan dari file '{nama_file}.txt'\n")
                 return 
-                except FileNotFoundError:
+        
+    except FileNotFoundError:
         print(f"\n[!] File '{nama_file}.txt' tidak ditemukan\n")
         return
-## menampilkan inventory ##
+
+## menampilkan inventory ##   
 def tampilkan_inventory():
     if not inventory:
         print("\n[!] Inventory kosong, gunakan opsi 1 atau 2\n")
@@ -129,7 +131,7 @@ def update_stok():
 
     else:
         print(f"[!] Barang '{nama}' tidak ditemukan dalam inventory\n")
-        
+
 ## cari barang ##
 def cari_barang():
     if not inventory:
@@ -144,7 +146,7 @@ def cari_barang():
 
     else:
         print(f"[!] Barang '{nama}' tidak ditemukan dalam inventory\n")
-        
+
 ## hapus barang ##
 def hapus_barang():
     if not inventory:
@@ -196,19 +198,18 @@ def tambah_barang():
 
     simpan_ke_file()
     print("[-] Data berhasil disimpan\n")
-
+    
 ## tampilan menu ##
 def menu():
     while True:
         print("======== Inventory Management ========")
         print("""1. Buat Inventory Baru
 2. Ambil Inventory Dari File (txt)
-3. tambah barang
-4. Tampilkan Inventory saat ini
-5. Update Stok Barang
-6. Cari Barang
-7. Hapus Barang
-8. Keluar
+3. Tampilkan Iventory saat ini
+4. Update Stok Barang
+5. Cari Barang
+6. Hapus Barang
+7. Keluar
 
 note:
 untuk ambil inventory dari file gunakan format :
@@ -224,15 +225,15 @@ ex: pensil,20,pack.""")
         elif pilih == "2" :
             isi_inventory_file()
         elif pilih == "3":
-            tambah_barang()
-        elif pilih == "4":
             tampilkan_inventory()
-        elif pilih =="5" :
+        elif pilih =="4" :
             update_stok()
-        elif pilih == "6":
+        elif pilih == "5":
             cari_barang()
-        elif pilih == "7":
+        elif pilih == "6":
             hapus_barang()
+        elif pilih == "7":
+            tambah_barang()
         elif pilih == "8":
             print("[-] keluar dari program\n")
             break
@@ -241,3 +242,4 @@ ex: pensil,20,pack.""")
 
 if __name__ == "__main__":
     menu()
+    
