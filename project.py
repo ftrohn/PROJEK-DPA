@@ -209,7 +209,8 @@ def menu():
 4. Update Stok Barang
 5. Cari Barang
 6. Hapus Barang
-7. Keluar
+7. Tambah barang
+8. Keluar
 
 note:
 untuk ambil inventory dari file gunakan format :
