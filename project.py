@@ -83,11 +83,50 @@ def isi_inventory_file():
         print(f"\n[!] File '{nama_file}.txt' tidak ditemukan\n")
         return
 ## menampilkan inventory ##
-
+def tampilkan_inventory():
+    if not inventory:
+        print("\n[!] Inventory kosong, gunakan opsi 1 atau 2\n")
+    else:
+        print("\n========== Inventory Saat Ini ==========")
+        for nama, (stok, satuan) in inventory.items():
+            print(f"- {nama} = {stok} {satuan}")
+        print("========================================\n")
 ## sinpan inventory ke file ##
+def simpan_ke_file():
+    if not isi_file:
+        print("[!] Tidak ada file aktif")
+        return
 
+    with open(f"{isi_file}.txt", "w") as file:
+        for nama, (stok, satuan) in inventory.items():
+            file.write(f"{nama},{stok},{satuan}\n")
 ## update stok barang ##
+def update_stok():
+    if not inventory:
+        print("[!] Inventory masih kosong\n")
+        return
 
+    print("\n===== Update Stok Barang =====")
+    nama = input("Masukkan nama barang : ").strip().capitalize()
+
+    if nama in inventory:
+        try:
+            stok_baru = int(input("Masukkan stok baru : "))
+
+            if stok_baru < 0:
+                print("[!] Stok tidak boleh negatif\n")
+                return
+
+            inventory[nama] = (stok_baru, inventory[nama][1])
+            simpan_ke_file()
+
+            print(f"Stok '{nama}' berhasil diupdate menjadi {stok_baru} {inventory[nama][1]}\n")
+
+        except ValueError:
+            print("[!] Stok harus berupa angka\n")
+
+    else:
+        print(f"[!] Barang '{nama}' tidak ditemukan dalam inventory\n")
 ## cari barang ##
 
 ## hapus barang ##
