@@ -52,3 +52,17 @@ def buat_inventory_baru():
 
     isi_file = nama_file
     print(f"Data berhasil disimpan di {nama_file}.txt")
+
+## menambah inventory dari file ##
+
+## menampilkan inventory ##
+
+## sinpan inventory ke file ##
+
+## update stok barang ##
+
+## cari barang ##
+
+## hapus barang ##
+
+## tampilan menu ##
