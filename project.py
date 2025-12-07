@@ -91,6 +91,7 @@ def tampilkan_inventory():
         for nama, (stok, satuan) in inventory.items():
             print(f"- {nama} = {stok} {satuan}")
         print("========================================\n")
+
 ## sinpan inventory ke file ##
 def simpan_ke_file():
     if not isi_file:
@@ -100,6 +101,7 @@ def simpan_ke_file():
     with open(f"{isi_file}.txt", "w") as file:
         for nama, (stok, satuan) in inventory.items():
             file.write(f"{nama},{stok},{satuan}\n")
+
 ## update stok barang ##
 def update_stok():
     if not inventory:
@@ -159,6 +161,41 @@ def hapus_barang():
     else:
         print(f"[!] Barang '{nama}' tidak ditemukan dalam inventory\n")
         return
+
+## tambah barang ##
+def tambah_barang():
+    if not inventory:
+        print("[!] Inventory masih kosong\n")
+        return
+
+    while True:
+        try:
+            nama = input("Masukkan nama barang : ").strip().capitalize()
+            stok = int(input("Masukkan stok barang : "))
+            satuan = input("Masukkan satuan barang (buah, pcs, kg, dll) : ").strip().lower()
+
+            if stok < 0:
+                print("[!] stok tidak boleh negatif\n")
+                continue
+
+        except ValueError:
+            print("[!] stok harus berupa angka\n")
+            continue
+
+        if nama in inventory:
+            print(f"Barang '{nama}' sudah ada, silakan masukkan nama lain\n")
+            continue
+        else:
+            inventory[nama] = (stok, satuan)
+            print(f"Barang '{nama}' berhasil ditambahkan")
+
+        lanjut = input("Tambah barang lagi? (y/n): ").strip().lower()
+        print()
+        if lanjut != "y":
+            break
+
+    simpan_ke_file()
+    print("[-] Data berhasil disimpan\n")
 
 ## tampilan menu ##
 def menu():
